@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  mysql-db:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  docker-common:
+    image: gun123/docker-common:0
+    restart: always
+    environment:
+      DB_CONNECTION_IP: mysql-db
+    ports:
+      - 9090:8888
