@@ -7,10 +7,24 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
-  docker-common:
+  docker-common-1:
     image: gun123/docker-common:0
     restart: always
     environment:
       DB_CONNECTION_IP: mysql-db
     ports:
-      - 9090:8888
+      - 9091:8888
+  docker-common-2:
+    image: gun123/docker-common:0
+    environment:
+      DB_CONNECTION_IP: mysql-db
+    ports:
+      - 9092:8888
+  nginx:
+    image: gun123/ngnix-docker:0
+    restart: always
+    ports:
+      - 7071:7070
+    depends_on:
+      - docker-common-1
+      - docker-common-2
